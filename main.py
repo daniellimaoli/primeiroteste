@@ -6,3 +6,6 @@ for i in range(10):
 
     print("apenas testando = 10")
 print("Fim do teste")
+
+print("Teste finalizado com sucesso!")
+print("Iniciando o teste...")
