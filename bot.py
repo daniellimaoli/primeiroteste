@@ -1,6 +1,8 @@
 import pandas as pd
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters, ConversationHandler
+from datetime import datetime
+import pytz  # Adicione esta importação
 
 TOKEN = "8449495417:AAGEK_y3E5P7byFe53A75_xZVj3Kswl8MUE"
 CHAT_ID = "7613886188"
@@ -76,14 +78,20 @@ async def confirmar_lista(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for _, row in df.iterrows():
         if pd.notna(row['observacoes']) and row['observacoes'] != "":
             lista.append(f"- {row['produto']} (Qtd: {row['quantidade']})")
+    # Horário de Portugal
+    tz = pytz.timezone("Europe/Lisbon")
+    horario = datetime.now(tz).strftime("%A, %d/%m/%Y %H:%M:%S")
     if not lista:
-        mensagem = "Nenhum produto foi marcado na lista de compras."
+        mensagem = f"Nenhum produto foi marcado na lista de compras.\nHorário do pedido: {horario}"
     else:
-        mensagem = "🛒 Lista de Compras Confirmada:\n" + "\n".join(lista)
+        mensagem = f"🛒 Lista de Compras Confirmada ({horario}):\n" + "\n".join(lista)
     # Envia para o chat de confirmação
     await context.bot.send_message(chat_id=CONFIRM_CHAT_ID, text=mensagem)
     # Confirma para o usuário
-    await update.callback_query.message.reply_text("O Mercado Liuzinho já recebeu seu pedido 🛒✨. Em breve, seu marido aventureiro vai sair em missão especial para buscar tudinho pra você 😎", reply_markup=ReplyKeyboardRemove())
+    await update.callback_query.message.reply_text(
+        f"O Mercado Liuzinho já recebeu seu pedido 🛒✨Em breve, seu marido aventureiro vai sair em missão especial para buscar tudinho pra você 😎\nHorário do pedido: {horario}\n",
+        reply_markup=ReplyKeyboardRemove()
+    )
 
 async def add_produto_nome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['novo_produto'] = update.message.text.strip()
