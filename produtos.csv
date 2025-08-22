@@ -1,12 +1,13 @@
 produto,quantidade,observacoes
-Leite,1,Marcado
-Pão,1,Marcado
-Torrada,0,
-Queijos,1,Marcado
+Leite,1,
+Pão,1,
+Torrada,1,
+Queijos,1,
 Ovos,12,Marcado
-Frutas,2,Marcado
-Coca Cola,2,Marcado
-Churu do liu,1,
-Papel higiênico úmido,1,Marcado
+Frutas,2,
+Coca Cola,2,
+Churu do liu,1,Marcado
+Papel higiênico úmido,1,
 Sal,1,
 Papel Toalha,1,Marcado
+Natas,2,Marcado

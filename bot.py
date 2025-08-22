@@ -35,7 +35,7 @@ async def enviar_lista(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Olá! Lista de compras interativa.")
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Oi, meu amor 😍")
     await enviar_lista(update, context)
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -83,7 +83,7 @@ async def confirmar_lista(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Envia para o chat de confirmação
     await context.bot.send_message(chat_id=CONFIRM_CHAT_ID, text=mensagem)
     # Confirma para o usuário
-    await update.callback_query.message.reply_text("Lista de compras confirmada e enviada!", reply_markup=ReplyKeyboardRemove())
+    await update.callback_query.message.reply_text("O Mercado Liuzinho já recebeu seu pedido 🛒✨. Em breve, seu marido aventureiro vai sair em missão especial para buscar tudinho pra você 😎", reply_markup=ReplyKeyboardRemove())
 
 async def add_produto_nome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['novo_produto'] = update.message.text.strip()
